@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Highlight from "./shared/Highlight";
-import LintMessage from "./LintMessage";
+import LintMessage from "./shared/LintMessage";
 
 class FeedbackFile extends Component {
   render() {
     const { feedback, onToggle, onSelectLine, classNames } = this.props;
     const { result, file } = feedback;
-    const hasError = result.errors.some(e => e.severity === "error");
+    // const hasError = result.errors.some(e => e.severity === "error");
 
     return (
       <div className={"file " + classNames}>

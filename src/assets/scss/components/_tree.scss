@@ -1,0 +1,73 @@
+$levels: 0, 1, 2, 3, 4, 5;
+
+.tree-search {
+  width: 100%;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.tree-view {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 15px;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.tree-item {
+  position: relative;
+  padding: 8px 16px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: $color-bg;
+  }
+  &--active {
+    color: $color-primary;
+  }
+  &--focused {
+    background-color: $color-bg;
+  }
+  &--children::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    margin-top: -7px;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBkPSJNMTYuMDAzIDE4LjYyNmw3LjA4MS03LjA4MUwyNSAxMy40NmwtOC45OTcgOC45OTgtOS4wMDMtOSAxLjkxNy0xLjkxNnoiLz48L3N2Zz4=');
+    background-size: contain;
+    transition: transform 250ms ease;
+    transform: rotate(-90deg);
+  }
+  &--open::before {
+    transform: rotate(0deg);
+  }
+}
+
+.tree-item-icon {
+  display: inline-block;
+}
+
+@each $level in $levels {
+  .tree-item-level-#{$level} {
+    padding-left: 24px + $level * 16px;
+
+    &::before {
+      left: $level * 16px;
+    }
+  }
+}
+

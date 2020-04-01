@@ -15,7 +15,9 @@ $border-color-dark: #d4d9dc;
   }
 
   &.collapsed .file-content {
-    display: none;
+    max-height: 180px;
+    opacity: 0.5;
+    overflow: hidden;
   }
 }
 .file-header {
@@ -36,7 +38,7 @@ $border-color-dark: #d4d9dc;
   background-color: #FFF;
   border-bottom: 1px solid $border-color;
   overflow-y: auto;
-  resize: vertical;
+  transition: opacity 250ms ease;
 }
 .file-footer {
   padding: 12px 16px;
