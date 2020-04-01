@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Highlight from "../components/shared/Highlight";
 import SearchForm from "../components/SearchForm";
 import { getFeedback } from "../services/FeedbackService";
 import { ReactComponent as Loader } from '../assets/img/loader.svg';
+import FeedbackFile from "../components/FeedbackFile";
 
 export default class Review extends Component {
   state = {
@@ -17,13 +17,12 @@ export default class Review extends Component {
     getFeedback(data.user, data.repo)
       .then(result => {
         if (result.error) {
-          throw new Error(result.error);
+          throw result.error;
         } else {
           this.setState({ loading: false, result: result });
         }
       })
       .catch(error => {
-        console.log('Got error', error);
         this.setState({ loading: false, result: null });
       });
   };
@@ -38,22 +37,16 @@ export default class Review extends Component {
     const { result, active } = this.state;
 
     return result.data.map((feedback, index) => {
-      const { result, file } = feedback;
-      const classNames = active[index] ? '' : ' collapsed';
+      const classNames = active[index] ? '' : 'collapsed';
 
       return (
-        <div className={"file" + classNames} key={file.path}>
-          <div className="file-header" onClick={() => this.toggleFile(index)}>
-            <div>{file.name}</div>
-            <small>{file.path}</small>
-          </div>
-          <div className="file-content">
-            <Highlight code={file.content} onSelectLine={(ln) => window.alert(ln)}/>
-          </div>
-          <div className="file-footer">
-            Passed: {result.passed.toString()}
-          </div>
-        </div>
+        <FeedbackFile
+          key={feedback.file.path}
+          feedback={feedback}
+          classNames={classNames}
+          onToggle={() => this.toggleFile(index)}
+          onSelectLine={(ln) => alert(ln)}
+        />
       )
     })
   }
