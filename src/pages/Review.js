@@ -11,14 +11,19 @@ export default class Review extends Component {
     active: {}
   };
 
-  submitForm = (repo) => {
+  submitForm = (data) => {
     this.setState({ loading: true, active: {} });
 
-    getFeedback(repo)
+    getFeedback(data.user, data.repo)
       .then(result => {
-        this.setState({ loading: false, result });
+        if (result.error) {
+          throw new Error(result.error);
+        } else {
+          this.setState({ loading: false, result: result });
+        }
       })
       .catch(error => {
+        console.log('Got error', error);
         this.setState({ loading: false, result: null });
       });
   };
@@ -32,14 +37,15 @@ export default class Review extends Component {
   getFiles() {
     const { result, active } = this.state;
 
-    return result.feedback.map((fb, index) => {
-      const { result, file } = fb;
+    return result.data.map((feedback, index) => {
+      const { result, file } = feedback;
       const classNames = active[index] ? '' : ' collapsed';
 
       return (
-        <div className={"file" + classNames} key={file.name + index}>
+        <div className={"file" + classNames} key={file.path}>
           <div className="file-header" onClick={() => this.toggleFile(index)}>
-            {file.name}
+            <div>{file.name}</div>
+            <small>{file.path}</small>
           </div>
           <div className="file-content">
             <Highlight code={file.content} onSelectLine={(ln) => window.alert(ln)}/>

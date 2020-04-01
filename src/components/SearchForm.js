@@ -5,16 +5,23 @@ import Button from './shared/Button';
 
 class SearchForm extends Component {
   state = {
-    repo: ''
+    form: {
+      user: null,
+      repo: null,
+      branch: null,
+    }
   };
 
-  setRepo = (e) => {
-    this.setState({ repo: e.target.value });
+  setInput = (key) => (e) => {
+    const form = { ...this.state.form };
+    form[key] = e.target.value;
+    this.setState({ ...this.state, form });
   };
 
   submit = (e) => {
     e.preventDefault();
-    this.props.onSubmit(this.state.repo);
+    const form = { ...this.state.form };
+    this.props.onSubmit(form);
   };
 
   render() {
@@ -22,7 +29,8 @@ class SearchForm extends Component {
 
     return (
       <form className="search-form" onSubmit={this.submit}>
-        <Input type="text" name="repo" placeholder="WincAcademy/StudentDashboardExample" onChange={this.setRepo}/>
+        <Input type="text" name="user" placeholder="User" onChange={this.setInput('user')}/>
+        <Input type="text" name="repo" placeholder="Repository" onChange={this.setInput('repo')}/>
         <Button type="submit" disabled={disabled}>
           <SearchIcon/> Search
         </Button>
