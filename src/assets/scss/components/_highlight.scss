@@ -1,9 +1,12 @@
+@import "../base/variables";
+
 pre {
   margin: 0;
   padding: 16px 0;
   overflow: auto;
 
   code {
+    font-size: 13px;
     line-height: 22px;
     background-color: #FFF;
   }
@@ -14,7 +17,7 @@ code.hljs {
   background-color: #FFF;
 
   &:not(.hljs-line-numbers) {
-    padding-left: 48px;
+    padding-left: 56px;
   }
 }
 
@@ -23,12 +26,43 @@ table.hljs-ln {
 
   td:first-child {
     width: 48px;
-    color: #AAA;
-    padding-right: 16px;
-    text-align: right;
+  }
+
+  td:last-child {
+    padding-left: 8px;
   }
 
   tr:hover {
-    background-color: #FAFAFA;
+    background-color: $color-bg;
+  }
+
+}
+
+.hljs-ln-n {
+  color: #AAA;
+  text-align: right;
+  padding-right: 8px;
+
+  &[data-lint-message] {
+    font-weight: bold;
+    cursor: pointer;
+    color: $color-warning;
+    border-left: 3px solid $color-warning;
+    background-color: $color-warning-light;
+
+    &:hover {
+      color: #FFF;
+      background-color: $color-warning;
+    }
+  }
+
+  &[data-lint-message="error"] {
+    color: $color-negative;
+    border-left: 3px solid $color-negative;
+    background-color: $color-negative-light;
+
+    &:hover {
+      background-color: $color-negative;
+    }
   }
 }

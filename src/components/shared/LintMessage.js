@@ -21,7 +21,7 @@ const LintMessage = ({ error }) => {
           </tr>
           <tr>
             <td>Position</td>
-            <td>line {line}, column {column}</td>
+            <td>line { line }, column { column }</td>
           </tr>
         </tbody>
       </table>

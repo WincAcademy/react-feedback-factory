@@ -36,7 +36,10 @@ class Highlight extends Component {
     if (node.innerHTML) {
       window.hljs.highlightBlock(node);
       window.hljs.lineNumbersBlock(node);
-      window.setTimeout(() => node.classList.add('hljs-line-numbers'), 0);
+      window.setTimeout(() => {
+        node.classList.add('hljs-line-numbers');
+        this.props.onInit(node);
+      }, 0);
     }
   };
 

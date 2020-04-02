@@ -1,15 +1,7 @@
 $levels: 0, 1, 2, 3, 4, 5;
 
-.tree-search {
-  width: 100%;
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 15px;
-  margin-bottom: 15px;
-}
-
 .tree-view {
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   list-style: none;
   padding-left: 0;
   margin: 0;
@@ -35,10 +27,11 @@ $levels: 0, 1, 2, 3, 4, 5;
     background-color: $color-bg;
   }
   &--active {
+    font-weight: 500;
     color: $color-primary;
   }
   &--focused {
-    background-color: $color-bg;
+    font-weight: 500;
   }
   &--children::before {
     content: "";
@@ -65,10 +58,10 @@ $levels: 0, 1, 2, 3, 4, 5;
 
 @each $level in $levels {
   .tree-item-level-#{$level} {
-    padding-left: 24px + $level * 16px;
+    padding-left: 32px + $level * 16px;
 
     &::before {
-      left: $level * 16px;
+      left: 8px + $level * 16px;
     }
   }
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import Input from "./shared/Input";
 import TreeItem from "./TreeItem";
 import TreeMenu from "react-simple-tree-menu";
 
@@ -14,9 +13,8 @@ const TreeView = ({ data, onClickItem, activeKey }) => {
       onClickItem={onClickItem}
       initialActiveKey={activeKey}
     >
-      {({ search, items }) => (
+      {({ items }) => (
         <React.Fragment>
-          <Input className="tree-search" onChange={e => search(e.target.value)} placeholder="Search repository" />
           <ul className="tree-view">
             { renderItems(items) }
           </ul>
@@ -29,9 +27,14 @@ const TreeView = ({ data, onClickItem, activeKey }) => {
 export default TreeView;
 
 /**
- * Util function to map API tree response to TreeView format.
+ * Recursive utility function to map the API tree response
+ * to a format that is compatible with TreeMenu.
+ *
+ * @param {object} item
+ * @param {number} level
+ * @returns {object}
  */
-export const mapNode = (item, level = 0) => {
+export const mapTreeNode = (item, level = 0) => {
   const node = {
     key: item.name + level,
     label: item.name,
@@ -41,7 +44,7 @@ export const mapNode = (item, level = 0) => {
 
   if (node.type === 'directory') {
     node.nodes = item.children
-      .map(child => mapNode(child, level + 1))
+      .map(child => mapTreeNode(child, level + 1))
       .sort((a, b) => a.type.localeCompare(b.type));
   }
 

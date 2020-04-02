@@ -13,8 +13,23 @@ class FeedbackFile extends Component {
 
   render() {
     const { active } = this.state;
-    const { feedback, onSelectLine } = this.props;
+    const { feedback } = this.props;
     const { result, file } = feedback;
+
+    const loaded = (element) => {
+      // manipulate the DOM in order to append linter messages to
+      // the highlight block, don't try this at home
+      result.errors.forEach((error) => {
+        const line = element.querySelector(`div[data-line-number="${error.line}"]`);
+        if (!line.dataset.lintMessage) {
+          line.dataset.lintMessage = error.severity;
+          line.addEventListener('click', (e) => {
+            alert(JSON.stringify(error, null, 1));
+            e.stopPropagation();
+          })
+        }
+      });
+    };
 
     return (
       <div className={"file " + (active ? "" : "collapsed")}>
@@ -23,11 +38,11 @@ class FeedbackFile extends Component {
           <small>{file.path}</small>
         </div>
         <div className="file-content">
-          <Highlight code={file.content} onSelectLine={onSelectLine}/>
+          <Highlight code={file.content} onInit={loaded} onSelectLine={() => {}}/>
         </div>
         <div className="file-footer">
           Passed: {result.passed.toString()}
-          {result.errors.map((error, i) => <LintMessage key={i} error={error}/>)}
+          {/*{result.errors.map((error, i) => <LintMessage key={i} error={error}/>)}*/}
         </div>
       </div>
     );

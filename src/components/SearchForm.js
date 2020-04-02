@@ -30,6 +30,7 @@ class SearchForm extends Component {
     return (
       <form className="search-form" onSubmit={this.submit}>
         <Input type="text" name="user" placeholder="User" onChange={this.setInput('user')}/>
+        <span className="separator">/</span>
         <Input type="text" name="repo" placeholder="Repository" onChange={this.setInput('repo')}/>
         <Button type="submit" disabled={disabled}>
           <SearchIcon/> Search

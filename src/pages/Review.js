@@ -3,7 +3,7 @@ import SearchForm from "../components/SearchForm";
 import { getFeedback } from "../services/FeedbackService";
 import { ReactComponent as Loader } from '../assets/img/loader.svg';
 import FeedbackFile from "../components/FeedbackFile";
-import TreeView, { mapNode } from "../components/TreeView";
+import TreeView, { mapTreeNode } from "../components/TreeView";
 
 export default class Review extends Component {
   state = {
@@ -25,27 +25,21 @@ export default class Review extends Component {
     this.setState({
       loading: false,
       result: data ? data.result : null,
-      tree: data ? [mapNode(data.tree)] : null
+      tree: data ? [mapTreeNode(data.tree)] : null
     });
   }
 
   getFiles() {
     const { result, filter } = this.state;
-    const filtered = result.filter(feedback => feedback.file.path.includes(filter));
+    const filtered = result.filter(feedback => filter ? feedback.file.path.includes(filter) : true);
 
     if (filtered.length === 0) {
       return 'No validated files found';
     }
 
-    return filtered.map((feedback, index) => {
-      return (
-        <FeedbackFile
-          key={feedback.file.path}
-          feedback={feedback}
-          onSelectLine={(ln) => alert(ln)}
-        />
-      )
-    });
+    return filtered.map((feedback, index) => (
+      <FeedbackFile key={feedback.file.path} feedback={feedback}/>
+    ));
   }
 
   getSidebar() {

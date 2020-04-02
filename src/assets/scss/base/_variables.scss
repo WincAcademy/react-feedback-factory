@@ -1,14 +1,22 @@
 // Typography
-$font-family: 'Poppins', 'Roboto', 'Open Sans', sans-serif;
-$font-size:   15px;
+$font-family: 'Roboto', 'Open Sans', Arial, sans-serif;
+$font-size:   16px;
 $line-height: 1.5;
 
 // Colors
-$color-base:      #4a4a4a;
-$color-primary:   #4a90e2;
-$color-secondary: #ECBA1D;
-$color-bg:        #fafbfc;
-$color-border:    #e5e8ea;
+$color-base:         #4a4a4a;
+$color-primary:      #4a90e2;
+$color-secondary:    #ECBA1D;
+$color-muted:        #777777;
+
+$color-warning:         #F1B708;
+$color-warning-light:   #fcf1ce;
+$color-negative:        #CB2030;
+$color-negative-light:  #f7dee0;
+
+$color-bg:           #fafbfc;
+$color-border:       #e5e8ea;
+$color-border-dark:  #d4d9dc;
 
 // Misc
 $focus-box-shadow: 0 0 0 3px rgba($color-primary, 0.4);
