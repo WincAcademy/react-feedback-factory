@@ -39,11 +39,7 @@ $toolbar-height: 140px;
   border-bottom: 1px solid $color-border;
 }
 
-.app-content {
-  display: flex;
-  position: relative;
-  height: calc(100vh - #{$header-height + $toolbar-height});
-
+.app-page {
   .loader {
     position: absolute;
     top: 50%;
@@ -52,6 +48,12 @@ $toolbar-height: 140px;
     height: 64px;
     transform: translate(-50%, -50%);
   }
+}
+
+.app-content {
+  display: flex;
+  position: relative;
+  height: calc(100vh - #{$header-height + $toolbar-height});
 }
 
 .app-sidebar {
