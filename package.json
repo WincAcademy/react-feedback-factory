@@ -1,7 +1,10 @@
 {
   "name": "react-feedback-factory",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
+  "authors": [
+    "Jason Koolman <jason@wincacademy.nl>"
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
