@@ -3,14 +3,22 @@ import Highlight from "./shared/Highlight";
 import LintMessage from "./shared/LintMessage";
 
 class FeedbackFile extends Component {
+  state = {
+    active: false
+  };
+
+  toggle = () => {
+    this.setState({ active: !this.state.active });
+  };
+
   render() {
-    const { feedback, onToggle, onSelectLine, classNames } = this.props;
+    const { active } = this.state;
+    const { feedback, onSelectLine } = this.props;
     const { result, file } = feedback;
-    // const hasError = result.errors.some(e => e.severity === "error");
 
     return (
-      <div className={"file " + classNames}>
-        <div className="file-header" onClick={onToggle}>
+      <div className={"file " + (active ? "" : "collapsed")}>
+        <div className="file-header" onClick={this.toggle}>
           <div>{file.name}</div>
           <small>{file.path}</small>
         </div>
