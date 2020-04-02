@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Highlight from "./shared/Highlight";
-import LintMessage from "./shared/LintMessage";
 
 class FeedbackFile extends Component {
   state = {
@@ -39,10 +38,6 @@ class FeedbackFile extends Component {
         </div>
         <div className="file-content">
           <Highlight code={file.content} onInit={loaded} onSelectLine={() => {}}/>
-        </div>
-        <div className="file-footer">
-          Passed: {result.passed.toString()}
-          {/*{result.errors.map((error, i) => <LintMessage key={i} error={error}/>)}*/}
         </div>
       </div>
     );

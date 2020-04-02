@@ -37,9 +37,11 @@ export default class Review extends Component {
       return 'No validated files found';
     }
 
-    return filtered.map((feedback, index) => (
-      <FeedbackFile key={feedback.file.path} feedback={feedback}/>
-    ));
+    return filtered.map((feedback) => {
+      return (
+        <FeedbackFile key={feedback.file.path} feedback={feedback}/>
+      );
+    });
   }
 
   getSidebar() {
@@ -56,7 +58,7 @@ export default class Review extends Component {
         <section className="app-toolbar">
           <SearchForm disabled={loading} onSubmit={this.submitForm}/>
         </section>
-        <section className="app-content">
+        <section className={"app-content" + (loading ? " loading" : "")}>
           <aside className="app-sidebar">
             { result && this.getSidebar() }
           </aside>
