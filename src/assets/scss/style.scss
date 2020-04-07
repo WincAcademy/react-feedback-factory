@@ -46,7 +46,7 @@ $toolbar-height: 120px;
 .app-content {
   display: flex;
   position: relative;
-  height: calc(100vh - #{$header-height + $toolbar-height});
+  height: calc(100vh - #{$header-height});
   transition: opacity 250ms ease;
 
   &.loading {
