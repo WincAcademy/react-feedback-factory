@@ -20,7 +20,7 @@ class FeedbackFile extends Component {
       // the highlight block, don't try this at home
       result.errors.forEach((error) => {
         const line = element.querySelector(`div[data-line-number="${error.line}"]`);
-        if (!line.dataset.lintMessage) {
+        if (line && !line.dataset.lintMessage) {
           line.dataset.lintMessage = error.severity;
           line.addEventListener('click', (e) => {
             alert(JSON.stringify(error, null, 1));

@@ -10,8 +10,13 @@
 @import "components/highlight";
 @import "components/tree";
 
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/modal";
+
 $header-height: 54px;
-$toolbar-height: 140px;
+$toolbar-height: 120px;
 
 .app-header {
   display: flex;
@@ -35,8 +40,7 @@ $toolbar-height: 140px;
   display: flex;
   height: $toolbar-height;
   align-content: center;
-  background-color: $color-bg;
-  border-bottom: 1px solid $color-border;
+  border-bottom: 1px solid $color-border-dark;
 }
 
 .app-content {
@@ -52,16 +56,20 @@ $toolbar-height: 140px;
 
 .app-sidebar {
   width: 320px;
-  padding: 16px;
-  border-right: 1px solid $color-border;
+  border-right: 1px solid $color-border-dark;
   overflow: auto;
   resize: horizontal;
+
+  .block {
+    padding: 24px;
+    border-bottom: 1px solid $color-border;
+  }
 
   @media (max-width: 720px) {
     display: none;
   }
 
-  > div[tabindex="0"] {
+  div[tabindex="0"] {
     outline: 0;
   }
 }
@@ -70,6 +78,7 @@ $toolbar-height: 140px;
   flex: 1;
   padding: 24px;
   overflow-y: auto;
+  background-color: $color-bg;
 }
 
 .search-form {

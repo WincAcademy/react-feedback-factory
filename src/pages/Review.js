@@ -4,13 +4,16 @@ import { getFeedback } from "../services/FeedbackService";
 import { ReactComponent as Loader } from '../assets/img/loader.svg';
 import FeedbackFile from "../components/FeedbackFile";
 import TreeView, { mapTreeNode } from "../components/TreeView";
+import Button from "../components/shared/Button";
+import FeedbackDialog from "../components/FeedbackDialog";
 
 export default class Review extends Component {
   state = {
     loading: false,
-    result: [],
+    result: null,
     tree: null,
-    filter: ''
+    filter: '',
+    showModal: false,
   };
 
   submitForm = (data) => {
@@ -31,23 +34,42 @@ export default class Review extends Component {
 
   getFiles() {
     const { result, filter } = this.state;
-    const filtered = result.filter(feedback => filter ? feedback.file.path.includes(filter) : true);
+
+    const filtered = result.filter(feedback =>
+      (filter ? feedback.file.path.includes(filter) : true)
+    );
 
     if (filtered.length === 0) {
       return 'No validated files found';
     }
 
-    return filtered.map((feedback) => {
+    return filtered.map((feedback, i) => {
       return (
-        <FeedbackFile key={feedback.file.path} feedback={feedback}/>
+        <FeedbackFile key={feedback.file.path + i} feedback={feedback}/>
       );
     });
   }
 
   getSidebar() {
-    const tree = this.state.tree;
+    const { tree, showModal } = this.state;
     const filter = (item) => this.setState({ filter: item.path });
-    return tree && <TreeView data={tree} onClickItem={filter}/>
+    const setShowModal = (bool) => this.setState({ showModal: bool });
+
+    return (
+      <React.Fragment>
+        <div className="block">
+          <h4>Project</h4>
+          <FeedbackDialog show={showModal} onHide={() => setShowModal(false)}/>
+          <Button size="sm" onClick={() => setShowModal(true)}>
+            Feedback
+          </Button>
+        </div>
+        <div className="block">
+          <h4>Directory tree</h4>
+          { tree && <TreeView data={tree} onClickItem={filter}/> }
+        </div>
+      </React.Fragment>
+    )
   }
 
   render() {

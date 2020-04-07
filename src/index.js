@@ -5,9 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import './assets/scss/style.scss';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <App />, // TODO: Strict mode is disabled for bootstrap modal, create custom modal implementation
   document.getElementById('root')
 );
 
