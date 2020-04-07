@@ -1,35 +1,30 @@
 import React, { Component } from 'react';
-import SearchForm from "../components/SearchForm";
-import { getFeedback } from "../services/FeedbackService";
-import { ReactComponent as Loader } from '../assets/img/loader.svg';
 import FeedbackFile from "../components/FeedbackFile";
 import TreeView, { mapTreeNode } from "../components/TreeView";
 import Button from "../components/shared/Button";
 import FeedbackDialog from "../components/FeedbackDialog";
+import { connect } from "react-redux";
+import { getProject } from "../redux/selectors";
 
-export default class Review extends Component {
+class Review extends Component {
   state = {
-    loading: false,
+    repo: null,
     result: null,
     tree: null,
     filter: '',
     showModal: false,
   };
 
-  submitForm = (data) => {
-    this.setState({ loading: true, active: {} });
+  componentDidMount() {
+    const project = this.props.project;
 
-    getFeedback(data.user, data.repo)
-      .then(res => this.setResult(res.data))
-      .catch(err => this.setResult(null));
-  };
-
-  setResult(data) {
-    this.setState({
-      loading: false,
-      result: data ? data.result : null,
-      tree: data ? [mapTreeNode(data.tree)] : null
-    });
+    if (project) {
+      this.setState({
+        repo: project.repo,
+        result: project.result,
+        tree: [mapTreeNode(project.tree)],
+      });
+    }
   }
 
   getFiles() {
@@ -73,14 +68,14 @@ export default class Review extends Component {
   }
 
   render() {
-    const { loading, result } = this.state;
+    const { result, repo } = this.state;
 
     return (
       <div className="app-page">
         <section className="app-toolbar">
-          <SearchForm disabled={loading} onSubmit={this.submitForm}/>
+          { repo && repo.slug }
         </section>
-        <section className={"app-content" + (loading ? " loading" : "")}>
+        <section className="app-content">
           <aside className="app-sidebar">
             { result && this.getSidebar() }
           </aside>
@@ -88,8 +83,17 @@ export default class Review extends Component {
             { result && this.getFiles() }
           </div>
         </section>
-        { loading && <Loader className="loader"/> }
       </div>
     );
   }
 }
+
+const mapStateToProps = (state, props) => {
+  const project = getProject(state, props.match.params.id);
+  return { project };
+};
+
+export default connect(
+  mapStateToProps,
+  {}
+)(Review);

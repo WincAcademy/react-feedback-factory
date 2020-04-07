@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import WincLogoSrc from './assets/img/winc-logo.png';
 import Review from "./pages/Review";
+import Search from "./pages/Search";
 
 export default function App() {
   return (
@@ -12,7 +13,9 @@ export default function App() {
       </header>
       <main className="app-main">
         <Switch>
-          <Route path="/" component={Review}/>
+          <Route path="/project/:id" component={Review}/>
+          <Route path="/" exact={true} component={Search}/>
+          <Redirect to="/"/>
         </Switch>
       </main>
     </Router>

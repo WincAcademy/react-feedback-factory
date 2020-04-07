@@ -1,11 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'
+import store from './redux/store'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './assets/scss/style.scss';
 
+// TODO: Strict mode is disabled for bootstrap modal, create custom modal implementation
 ReactDOM.render(
-  <App />, // TODO: Strict mode is disabled for bootstrap modal, create custom modal implementation
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
 
