@@ -3,14 +3,15 @@
 .file {
   border: 1px solid $color-border-dark;
   margin-bottom: 24px;
+  background-color: #FFF;
   transition: box-shadow 250ms ease;
 
   &:hover {
-    box-shadow: 0 2px 10px rgba(0,0,0,.05);
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
   }
 
   &.collapsed .file-content {
-    max-height: 180px;
+    max-height: 128px;
     opacity: 0.5;
     overflow: hidden;
     pointer-events: none;
@@ -22,7 +23,6 @@
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
-  background-color: $color-bg;
   border-bottom: 1px solid $color-border;
 
   small {
