@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import WincLogoSrc from './assets/img/winc-logo.png';
-import Review from "./pages/Review";
+import Review from "./pages/Project";
 import Search from "./pages/Search";
 
 export default function App() {
