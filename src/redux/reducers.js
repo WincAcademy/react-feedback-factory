@@ -17,6 +17,15 @@ export default function(state = initialState, action) {
         }
       };
     }
+    case Type.REMOVE_PROJECT: {
+      const projects = { ...state.projects };
+      delete projects[action.payload.id];
+
+      return {
+        ...state,
+        projects
+      };
+    }
     default:
       return state;
   }

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addProject } from '../redux/actions';
+import { addProject, removeProject } from '../redux/actions';
 import { getProjects } from "../redux/selectors";
 import { getFeedback } from '../services/FeedbackService';
 import { ReactComponent as Loader } from '../assets/img/loader.svg';
 import SearchForm from '../components/SearchForm';
+import Button from "../components/shared/Button";
 
 class Search extends Component {
   state = {
@@ -29,10 +30,14 @@ class Search extends Component {
   }
 
   renderProjects() {
-    const { projects, history } = this.props;
+    const { projects, history, removeProject } = this.props;
 
     const items = Object.keys(projects).map(key => (
-      <li key={key} onClick={() => history.push(`/project/${key}`)}>{ key }</li>
+      <li key={key}>
+        { key }
+        <Button onClick={() => history.push(`/project/${key}`)}>View</Button>
+        <Button onClick={() => removeProject(key)}>Delete</Button>
+      </li>
     ));
 
     return (
@@ -63,5 +68,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { addProject }
+  { addProject, removeProject }
 )(Search);
