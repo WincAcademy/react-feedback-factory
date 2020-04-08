@@ -1,34 +1,25 @@
-import React, {Component} from "react";
+import React from "react";
 import EditorJs from "react-editor-js";
 import { EDITOR_TOOLS } from "../../constants";
 
-class Editor extends Component {
-  constructor(props) {
-    super(props);
-    this.editorRef = React.createRef();
-  }
+const Editor = ({ data, tools, onSave }) => {
+  let instance = null;
 
-  render() {
-    const { children, data, tools, onChange } = this.props;
+  const handleChange = async () => {
+    const data = await instance.save();
+    return onSave(data);
+  };
 
-    const init = () => {
-      console.log(this.editorRef.current.innerText);
-    };
-
-    return (
-      <div className="editor" ref={this.editorRef}>
-        <div className="editor-toolbar">
-          { children }
-        </div>
-        <EditorJs
-          data={data}
-          tools={tools || EDITOR_TOOLS}
-          onChange={onChange}
-          onReady={init}
-        />
-      </div>
-    )
-  }
+  return (
+    <div className="editor">
+      <EditorJs
+        data={data}
+        tools={tools || EDITOR_TOOLS}
+        onChange={onSave && handleChange}
+        instanceRef={ref => instance = ref}
+      />
+    </div>
+  )
 }
 
 export default Editor;

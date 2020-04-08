@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import FeedbackFile from "../components/FeedbackFile";
 import TreeView, { mapTreeNode } from "../components/TreeView";
 import Button from "../components/shared/Button";
@@ -46,15 +46,21 @@ const Project = (props) => {
   const getSidebar = () => {
     return (
       <React.Fragment>
+        <Link className="block" to={".."}>
+          Return to overview
+        </Link>
         <div className="block">
           <h4>Project</h4>
-          <Button size="sm" onClick={toReview}>
-            My Review
-          </Button>
+          <small>{ project.repo.slug }</small>
         </div>
         <div className="block">
           <h4>Directory tree</h4>
           { <TreeView data={project.tree} onClickItem={(item) => setFilter(item.path)}/> }
+        </div>
+        <div className="block">
+          <Button size="sm" onClick={toReview}>
+            Write Review
+          </Button>
         </div>
       </React.Fragment>
     )

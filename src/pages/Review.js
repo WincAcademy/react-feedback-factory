@@ -1,27 +1,12 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import Button from "../components/shared/Button";
+import { Link } from 'react-router-dom';
+import { REVIEW_TEMPLATE } from "../constants";
 import Editor from "../components/shared/Editor";
 
 const Review = (props) => {
-  const history = useHistory();
   const content = {
     time: Date.now(),
-    blocks: [
-      {
-        type: "header",
-        data: {
-          text: "Feedback",
-          level: 1
-        }
-      },
-      {
-        type: "paragraph",
-        data: {
-          text: "Start typing your review."
-        }
-      },
-    ]
+    blocks: REVIEW_TEMPLATE
   };
 
   const save = (data) => {
@@ -30,9 +15,14 @@ const Review = (props) => {
 
   return (
     <div className="app-page">
-      <Editor data={content} onChange={save}>
-        <Button size="sm" onClick={history.goBack}>Return to project</Button>
-      </Editor>
+      <section className="app-content">
+        <aside className="app-sidebar">
+          <Link to={"."} className="block">Return to project</Link>
+        </aside>
+        <div className="app-view">
+          <Editor data={content} onSave={save}/>
+        </div>
+      </section>
     </div>
   );
 };
