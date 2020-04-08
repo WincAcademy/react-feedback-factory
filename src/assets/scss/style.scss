@@ -16,7 +16,7 @@
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/modal";
 
-$header-height: 54px;
+$header-height: 52px;
 $toolbar-height: 120px;
 
 .app-header {
@@ -24,15 +24,15 @@ $toolbar-height: 120px;
   height: $header-height;
   align-items: center;
   padding: 0 16px;
-  background-color: #FFF;
-  border-bottom: 1px solid $color-border;
+  background-color: $color-primary;
 
   h1 {
-    font-size: 16px;
     margin-bottom: 0;
+    font-size: 16px;
+    color: #FFF;
   }
   img {
-    width: 97px;
+    width: 72px;
     margin-left: auto;
   }
 }
@@ -42,6 +42,7 @@ $toolbar-height: 120px;
   height: $toolbar-height;
   align-content: center;
   border-bottom: 1px solid $color-border-dark;
+  background-color: #FFF;
 }
 
 .app-content {
@@ -57,9 +58,11 @@ $toolbar-height: 120px;
 
 .app-sidebar {
   width: 320px;
+  min-width: 280px;
   border-right: 1px solid $color-border-dark;
   overflow: auto;
   resize: horizontal;
+  background-color: #FFF;
 
   .block {
     padding: 24px;
@@ -68,13 +71,19 @@ $toolbar-height: 120px;
     &:last-child {
       border-bottom: 0;
     }
+
   }
   a.block {
+    position: relative;
     display: block;
+    color: $color-muted;
     padding-top: 16px;
     padding-bottom: 16px;
-    font-size: 14px;
     text-decoration: none;
+
+    &:hover {
+      color: $color-primary;
+    }
   }
 
   @media (max-width: 720px) {
@@ -90,7 +99,6 @@ $toolbar-height: 120px;
   flex: 1;
   padding: 24px;
   overflow-y: auto;
-  background-color: $color-bg;
 }
 
 .search-form {

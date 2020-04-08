@@ -24,7 +24,7 @@ const TreeItem = ({
       aria-pressed={active}
       onClick={click}
     >
-      { hasNodes ? <FolderIcon fill="#4a90e2"/> : <FileIcon/> }
+      { hasNodes ? <FolderIcon fill="#dcb67a"/> : <FileIcon/> }
       <span>{ label }</span>
     </li>
   )

@@ -51,7 +51,8 @@ const Project = (props) => {
         </Link>
         <div className="block">
           <h4>Project</h4>
-          <small>{ project.repo.slug }</small>
+          User: { project.repo.user }<br/>
+          Repo: { project.repo.repo }
         </div>
         <div className="block">
           <h4>Directory tree</h4>
@@ -61,6 +62,9 @@ const Project = (props) => {
           <Button size="sm" onClick={toReview}>
             Write Review
           </Button>
+          <a className="btn btn--sm btn--basic" href={`https://github.com/${project.repo.user}/${project.repo.repo}`} target="_blank" rel="noreferrer noopener">
+            View repository
+          </a>
         </div>
       </React.Fragment>
     )
