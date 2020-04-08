@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import FeedbackFile from "../components/FeedbackFile";
 import TreeView, { mapTreeNode } from "../components/TreeView";
 import Button from "../components/shared/Button";
-import FeedbackDialog from "../components/FeedbackDialog";
 import { connect } from "react-redux";
 import { getProject } from "../redux/selectors";
 
@@ -11,7 +10,6 @@ const Project = (props) => {
   const history = useHistory();
   const [project, setProject] = useState(null);
   const [filter, setFilter] = useState('');
-  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     const project = props.project;
@@ -43,14 +41,15 @@ const Project = (props) => {
     ));
   };
 
+  const toReview = () => history.push(`/project/${props.projectId}/review`);
+
   const getSidebar = () => {
     return (
       <React.Fragment>
         <div className="block">
           <h4>Project</h4>
-          <FeedbackDialog show={modal} onHide={() => setModal(false)}/>
-          <Button size="sm" onClick={() => setModal(true)}>
-            Feedback
+          <Button size="sm" onClick={toReview}>
+            My Review
           </Button>
         </div>
         <div className="block">
@@ -76,8 +75,9 @@ const Project = (props) => {
 };
 
 const mapStateToProps = (state, props) => {
-  const project = getProject(state, props.match.params.id);
-  return { project };
+  const projectId = props.match.params.id;
+  const project = getProject(state, projectId);
+  return { projectId, project };
 };
 
 export default connect(
