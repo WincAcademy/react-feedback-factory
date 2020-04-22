@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import WincLogoSrc from './assets/img/winc-logo.png';
+import WincLogoSrc from './assets/img/winc-logo-white.jpg';
 import Review from "./pages/Review";
 import Project from "./pages/Project";
 import Search from "./pages/Search";
