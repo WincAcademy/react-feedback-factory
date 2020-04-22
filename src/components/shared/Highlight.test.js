@@ -10,13 +10,4 @@ describe('Highlight component', () => {
     expect(classList.contains('highlight')).toBe(true);
   });
 
-  it('should detect the correct language', async () => {
-    const js = render(<Highlight code="function test() {}"/>);
-    const xml = render(<Highlight code="<strong>HTML</strong>"/>);
-    const css = render(<Highlight code=".test { color: red; }"/>);
-    expect(js.container.querySelector('code')).toHaveClass('javascript');
-    expect(xml.container.querySelector('code')).toHaveClass('xml');
-    expect(css.container.querySelector('code')).toHaveClass('css');
-  });
-
 });

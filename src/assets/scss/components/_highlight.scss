@@ -1,68 +1,31 @@
 @import "../base/variables";
 
-pre {
-  margin: 0;
-  padding: 16px 0;
-  overflow: auto;
-
-  code {
-    font-size: 13px;
-    line-height: 22px;
-    background-color: #FFF;
-  }
-}
-
-code.hljs {
-  padding: 0;
-  background-color: #FFF;
-
-  &:not(.hljs-line-numbers) {
-    padding-left: 56px;
-  }
-}
-
-table.hljs-ln {
-  width: 100%;
-
-  td:first-child {
-    width: 48px;
+.highlight {
+  pre {
+    font-size: 14px!important;
+    padding: 16px 0 0!important;
+    background-color: #FFF!important;
+    margin: 0;
   }
 
-  td:last-child {
-    padding-left: 8px;
-  }
-
-  tr:hover {
-    background-color: $color-bg;
-  }
-
-}
-
-.hljs-ln-n {
-  color: #AAA;
-  text-align: right;
-  padding-right: 8px;
-
-  &[data-lint-message] {
-    font-weight: bold;
+  span[data-lint-message] {
+    display: block;
     cursor: pointer;
-    color: $color-warning;
     border-left: 2px solid $color-warning;
-    background-color: $color-warning-light;
-
-    &:hover {
-      color: #FFF;
-      background-color: $color-warning;
-    }
+    background: $color-warning-light;
+    background: linear-gradient(to right, $color-warning-light, transparent);
+  }
+  span[data-lint-message="error"] {
+    border-left: 3px solid $color-negative;
+    background: $color-negative-light;
+    background: linear-gradient(to right, $color-negative-light, transparent);
   }
 
-  &[data-lint-message="error"] {
-    color: $color-negative;
-    border-left: 3px solid $color-negative;
-    background-color: $color-negative-light;
-
-    &:hover {
-      background-color: $color-negative;
-    }
+  .react-syntax-highlighter-line-number {
+    display: block;
+    width: 48px;
+    color: #AAA;
+    text-align: right;
+    padding-right: 4px;
   }
 }

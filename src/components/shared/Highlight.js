@@ -1,62 +1,35 @@
 import React, { Component } from 'react';
-import hljs from 'highlight.js/lib/highlight';
-import javascript from 'highlight.js/lib/languages/javascript';
-import typescript from 'highlight.js/lib/languages/typescript';
-import xml from 'highlight.js/lib/languages/xml';
-import css from 'highlight.js/lib/languages/css';
-import scss from 'highlight.js/lib/languages/scss';
-import 'highlight.js/styles/github.css';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
+import ts from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript';
+import xml from 'react-syntax-highlighter/dist/esm/languages/hljs/xml';
+import css from 'react-syntax-highlighter/dist/esm/languages/hljs/css';
+import scss from 'react-syntax-highlighter/dist/esm/languages/hljs/scss';
+import less from 'react-syntax-highlighter/dist/esm/languages/hljs/less';
+import GitHubStyle from 'react-syntax-highlighter/dist/esm/styles/hljs/github';
 
-hljs.registerLanguage('javascript', javascript);
-hljs.registerLanguage('typescript', typescript);
-hljs.registerLanguage('xml', xml);
-hljs.registerLanguage('css', css);
-hljs.registerLanguage('scss', scss);
-
-if (!window.hljs) {
-  // make hljs available on the window object, which is
-  // required for the line numbers library to work
-  window.hljs = hljs;
-  require('highlightjs-line-numbers.js');
-}
+SyntaxHighlighter.registerLanguage('javascript', js);
+SyntaxHighlighter.registerLanguage('typescript', ts);
+SyntaxHighlighter.registerLanguage('xml', xml);
+SyntaxHighlighter.registerLanguage('css', css);
+SyntaxHighlighter.registerLanguage('scss', scss);
+SyntaxHighlighter.registerLanguage('less', less);
 
 class Highlight extends Component {
-  constructor(props) {
-    super(props);
-    this.nodeRef = React.createRef();
-  }
-
-  componentDidMount() {
-    this.highlight();
-  }
-
-  highlight = () => {
-    const node = this.nodeRef.current.querySelector('code');
-
-    if (node.innerHTML) {
-      window.hljs.highlightBlock(node);
-      window.hljs.lineNumbersBlock(node);
-      window.setTimeout(() => {
-        node.classList.add('hljs-line-numbers');
-        this.props.onInit(node);
-      }, 0);
-    }
-  };
-
-  selectLine = (e) => {
-    const node = e.target.closest('[data-line-number]');
-
-    if (node) {
-      const line = node.dataset.lineNumber;
-      this.props.onSelectLine(line);
-    }
-  };
 
   render() {
-    const { code } = this.props;
+    const { code, lineProps } = this.props;
 
     return (
-      <pre className='highlight' ref={this.nodeRef} onClick={this.selectLine}><code>{ code }</code></pre>
+      <div className='highlight'>
+        <SyntaxHighlighter
+          code={code}
+          style={GitHubStyle}
+          showLineNumbers={true}
+          wrapLines={true}
+          lineProps={lineProps}
+        />
+      </div>
     );
   }
 }

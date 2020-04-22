@@ -27,6 +27,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-simple-tree-menu": "^1.1.15",
+    "react-syntax-highlighter": "^12.2.1",
     "redux": "^4.0.5"
   },
   "scripts": {
