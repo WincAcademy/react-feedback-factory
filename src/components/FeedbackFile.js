@@ -38,7 +38,7 @@ class FeedbackFile extends Component {
           <small>{file.path}</small>
         </div>
         <div className="file-content">
-          <Highlight code={file.content} lineProps={this.lineProps}/>
+          { active && <Highlight code={file.content} lineProps={this.lineProps}/> }
         </div>
       </div>
     );
