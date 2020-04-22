@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = ({ type, id, name, value, placeholder, required, disabled, className, onChange }) => {
+const Input = ({ type, id, name, value, placeholder, required, disabled, className, onBlur, onChange }) => {
   return (
     <input
       id={id}
@@ -11,7 +11,9 @@ const Input = ({ type, id, name, value, placeholder, required, disabled, classNa
       placeholder={placeholder}
       required={required}
       disabled={disabled}
-      onChange={onChange}/>
+      onBlur={onBlur}
+      onChange={onChange}
+    />
   );
 };
 
