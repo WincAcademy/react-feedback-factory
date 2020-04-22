@@ -1,0 +1,84 @@
+$header-height: 52px;
+$toolbar-height: 120px;
+
+.app-header {
+  display: flex;
+  height: $header-height;
+  align-items: center;
+  padding: 0 16px;
+  background-color: $color-primary;
+
+  h1 {
+    margin-bottom: 0;
+    font-size: 16px;
+    color: #FFF;
+  }
+  img {
+    width: 40px;
+    margin-left: auto;
+  }
+}
+
+.app-toolbar {
+  display: flex;
+  height: $toolbar-height;
+  align-content: center;
+  border-bottom: 1px solid $color-border-dark;
+  background-color: #FFF;
+}
+
+.app-content {
+  display: flex;
+  position: relative;
+  height: calc(100vh - #{$header-height});
+  transition: opacity 250ms ease;
+
+  &.loading {
+    opacity: 0.3;
+  }
+}
+
+.app-sidebar {
+  width: 320px;
+  min-width: 280px;
+  border-right: 1px solid $color-border-dark;
+  overflow: auto;
+  resize: horizontal;
+  background-color: #FFF;
+
+  .block {
+    padding: 24px;
+    border-bottom: 1px solid $color-border;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+  }
+  a.block {
+    position: relative;
+    display: block;
+    color: $color-muted;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  @media (max-width: 720px) {
+    display: none;
+  }
+
+  div[tabindex="0"] {
+    outline: 0;
+  }
+}
+
+.app-view {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
