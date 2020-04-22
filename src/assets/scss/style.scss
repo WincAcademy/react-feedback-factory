@@ -5,10 +5,11 @@
 @import "base/typography";
 
 @import "components/button";
-@import "components/file";
-@import "components/input";
 @import "components/editor";
+@import "components/file";
+@import "components/forms";
 @import "components/highlight";
+@import "components/input";
 @import "components/tree";
 
 $header-height: 52px;
