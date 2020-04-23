@@ -25,7 +25,7 @@ const Project = (props) => {
     }
   }, [props.project, history]);
 
-  const getFiles = () => {
+  const getView = () => {
     const result = project.result;
 
     const filtered = result.filter(feedback =>
@@ -77,7 +77,7 @@ const Project = (props) => {
           { project && getSidebar() }
         </aside>
         <div className="app-view">
-          { project && getFiles() }
+          { project && getView() }
         </div>
       </section>
     </div>

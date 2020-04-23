@@ -1,42 +1,57 @@
 @import '../base/variables';
 
 .input {
-    display: block;
-    padding: 10px 14px;
-    font-family: $font-family;
-    font-size: $font-size;
-    color: $color-base;
-    background-color: #FFF;
-    border: 1px solid $color-border-dark;
-    border-radius: 3px;
-    transition: all 250ms ease;
+  display: block;
+  padding: 10px 14px;
+  font-family: $font-family;
+  font-size: $font-size;
+  color: $color-base;
+  background-color: #FFF;
+  border: 1px solid $color-border-dark;
+  border-radius: 3px;
+  transition: all 250ms ease;
 
-    &:disabled {
-        opacity: 0.6;
-        pointer-events: none;
-    }
-    &:hover, &:focus {
-        border-color: rgba($color-primary, 0.75);
-    }
-    &:focus {
-        outline: 0;
-        box-shadow: $focus-box-shadow;
-    }
+  &:disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &:hover, &:focus {
+    border-color: rgba($color-primary, 0.75);
+  }
+
+  &:focus {
+    outline: 0;
+    box-shadow: $focus-box-shadow;
+  }
+}
+
+select.input {
+  padding-right: 32px;
+  appearance: none;
+  background-size: 8px;
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2232%22%20viewBox%3D%220%200%2018%2032%22%20fill%3D%22%234a4a4a%22%3E%3Cpath%20d%3D%22M18.286%2012.571q0%20.464-.339.804l-8%208q-.339.339-.804.339t-.804-.339l-8-8Q0%2013.036%200%2012.571t.339-.804.804-.339h16q.464%200%20.804.339t.339.804z%22%2F%3E%3C%2Fsvg%3E");
+
+  &::-ms-expand {
+    display: none;
+  }
 }
 
 textarea.input {
-    width: 100%;
-    resize: none;
+  resize: vertical;
 }
 
 .input-group {
-    display: flex;
-    align-self: center;
-    flex-flow: row wrap;
-    margin-bottom: 12px;
+  display: flex;
+  align-self: center;
+  flex-flow: row wrap;
+  margin-bottom: 12px;
 
-    .input {
-        flex: 1 1 auto;
-        margin-right: 8px;
-    }
+  .input {
+    width: auto;
+    flex: 1 1 auto;
+    margin-right: 8px;
+  }
 }
