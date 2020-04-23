@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReviewForm from "../components/ReviewForm";
+import Button from "../components/shared/Button";
+import { generatePDF } from "../services/ReviewService";
 
 const Review = () => {
-  const save = (data) => {
-    console.log(data);
+  const [data, setData] = useState({});
+
+  const save = (value) => {
+    setData({ ...value });
+  };
+
+  const download = () => {
+    const { student, status, positives, improvements, remarks } = data;
+    generatePDF(student, 'Jason Koolman', status, positives, improvements, remarks);
   };
 
   const getSidebar = () => {
@@ -26,6 +35,7 @@ const Review = () => {
       <div className="review-container">
         <h2>Review</h2>
         <ReviewForm onSubmit={save}/>
+        <Button variant="basic" onClick={download}>Generate PDF</Button>
       </div>
     )
   };

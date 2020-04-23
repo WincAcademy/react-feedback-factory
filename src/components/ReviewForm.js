@@ -12,6 +12,11 @@ const ReviewForm = ({ initialValue, onSubmit }) => (
   >
     {({ values }) => (
       <Form>
+        <div className="form-group">
+          <label htmlFor="student">Student</label>
+          <Field as={Input} name="student" id="student"/>
+        </div>
+
         <label>Positives</label>
         <FieldArray name="positives" render={
           (helpers) => (
@@ -22,7 +27,7 @@ const ReviewForm = ({ initialValue, onSubmit }) => (
                   <Button size="sm" variant="basic" onClick={() => helpers.remove(index)}>&times;</Button>
                 </div>
               ))}
-              <Button size="sm" variant="basic" onClick={() => helpers.push('')}>Add positive</Button>
+              <Button size="sm" onClick={() => helpers.push('')}>Add positive</Button>
             </div>
           )}
         />
@@ -37,7 +42,7 @@ const ReviewForm = ({ initialValue, onSubmit }) => (
                   <Button size="sm" variant="basic" onClick={() => helpers.remove(index)}>&times;</Button>
                 </div>
               ))}
-              <Button size="sm" variant="basic" onClick={() => helpers.push('')}>Add improvement</Button>
+              <Button size="sm" onClick={() => helpers.push('')}>Add improvement</Button>
             </div>
           )}
         />
@@ -53,8 +58,8 @@ const ReviewForm = ({ initialValue, onSubmit }) => (
         </div>
 
         <div className="form-group">
-          <label htmlFor="notes">Additional remarks</label>
-          <Field as={Textarea} id="remarks" name="remarks"/>
+          <label htmlFor="notes">Personal remark</label>
+          <Field as={Textarea} name="remarks" id="remarks" rows={5}/>
         </div>
 
         <Button type="submit">Save changes</Button>

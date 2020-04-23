@@ -7,4 +7,8 @@ label {
 
 .form-group {
   margin-bottom: 16px;
+
+  input, textarea, select {
+    width: 100%;
+  }
 }

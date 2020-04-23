@@ -27,7 +27,6 @@
 }
 
 select.input {
-  width: 100%;
   padding-right: 32px;
   appearance: none;
   background-size: 8px;
@@ -41,8 +40,7 @@ select.input {
 }
 
 textarea.input {
-  width: 100%;
-  resize: none;
+  resize: vertical;
 }
 
 .input-group {
@@ -52,6 +50,7 @@ textarea.input {
   margin-bottom: 12px;
 
   .input {
+    width: auto;
     flex: 1 1 auto;
     margin-right: 8px;
   }
