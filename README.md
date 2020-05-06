@@ -15,6 +15,16 @@ Made with :heart: by your Winc teachers.
 2. Install dependencies: `npm install`
 4. Serve the application: `npm start`
 
+## Modules
+
+Built on the shoulders of giants.
+
+- React
+- Redux
+- Formik
+- PDFmake
+- Syntax Highlighter
+
 ## Available Scripts
 
 In the project directory, you can run:
