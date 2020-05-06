@@ -24,6 +24,28 @@
   transform: translate(-50%, -50%);
 }
 
+.project-list {
+  list-style: none;
+  margin: 40px auto;
+  padding-left: 0;
+  max-width: 720px;
+
+  li {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    padding: 8px 16px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba($color-primary, 0.05);
+    }
+  }
+  .btn:first-child {
+    margin-left: auto;
+  }
+}
+
 .search-form {
   display: flex;
   align-self: center;

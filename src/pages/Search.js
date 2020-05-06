@@ -33,15 +33,14 @@ class Search extends Component {
     const { projects, history, removeProject } = this.props;
 
     const items = Object.keys(projects).map(key => (
-      <li key={key}>
-        { key }
-        <Button onClick={() => history.push(`/project/${key}`)}>View</Button>
-        <Button onClick={() => removeProject(key)}>Delete</Button>
+      <li key={key} onClick={() => history.push(`/project/${key}`)}>
+        { projects[key].repo.slug }
+        <Button variant="basic" size="sm" onClick={() => removeProject(key)}>Delete</Button>
       </li>
     ));
 
     return (
-      <ul>{ items }</ul>
+      <ul className="project-list">{ items }</ul>
     );
   }
 
