@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { setProjectReview } from "../redux/actions";
+import { getProject } from "../redux/selectors";
+import { generatePDF } from "../services/ReviewService";
 import ReviewForm from "../components/ReviewForm";
 import Button from "../components/shared/Button";
-import { generatePDF } from "../services/ReviewService";
 
-const Review = () => {
+const Review = (props) => {
   const [data, setData] = useState({});
+
+  useEffect(() => {
+    const review = props.project.review || {};
+    setData({ ...review });
+  }, [props.project]);
 
   const save = (value) => {
     setData({ ...value });
+    props.setProjectReview(props.projectId, value);
   };
 
   const download = () => {
     const { student, status, positives, improvements, remarks } = data;
-    generatePDF(student, 'Jason Koolman', status, positives, improvements, remarks);
+    generatePDF(student, "Jason Koolman", status, positives, improvements, remarks);
   };
 
   const getSidebar = () => {
@@ -34,7 +43,7 @@ const Review = () => {
     return (
       <div className="review-container">
         <h2>Review</h2>
-        <ReviewForm onSubmit={save}/>
+        <ReviewForm initialValue={props.project.review} onSubmit={save}/>
         <Button variant="basic" onClick={download}>Generate PDF</Button>
       </div>
     )
@@ -54,4 +63,13 @@ const Review = () => {
   );
 };
 
-export default Review;
+const mapStateToProps = (state, props) => {
+  const projectId = props.match.params.id;
+  const project = getProject(state, projectId);
+  return { projectId, project };
+};
+
+export default connect(
+  mapStateToProps,
+  { setProjectReview }
+)(Review);
